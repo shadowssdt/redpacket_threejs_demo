@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧧 新春红包雨 - 手势抓红包</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Three.js 渲染容器 -->
+    <div id="canvas-container"></div>
+    
+    <!-- 春节装饰背景 -->
+    <div class="festive-bg">
+        <div class="lantern lantern-left">🏮</div>
+        <div class="lantern lantern-right">🏮</div>
+    </div>
+    
+    <!-- 顶部标题 -->
+    <div id="header">
+        <h1>🧧 新春红包雨 🧧</h1>
+        <p class="subtitle">握拳抓红包，松手继续抢！</p>
+    </div>
+    
+    <!-- 统计面板 -->
+    <div id="stats-panel">
+        <div class="stat-item">
+            <div class="stat-icon">🧧</div>
+            <div class="stat-info">
+                <span class="stat-label">已抓红包</span>
+                <span class="stat-value" id="packet-count">0</span>
+            </div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+            <div class="stat-icon">💰</div>
+            <div class="stat-info">
+                <span class="stat-label">累计金额</span>
+                <span class="stat-value" id="total-amount">¥0.00</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 抓取提示 -->
+    <div id="grab-hint" class="hidden">
+        <div class="grab-animation">✊</div>
+        <span>抓取中...</span>
+    </div>
+    
+    <!-- 金额弹出提示 -->
+    <div id="amount-popup" class="hidden">
+        <span class="popup-amount">+¥8.88</span>
+    </div>
+    
+    <!-- 摄像头预览 -->
+    <div id="camera-preview">
+        <video id="video" playsinline></video>
+        <canvas id="hand-canvas"></canvas>
+        <div id="camera-status">等待摄像头...</div>
+    </div>
+    
+    <!-- 手势状态指示器 -->
+    <div id="gesture-indicator">
+        <div class="gesture-icon">🖐️</div>
+        <div class="gesture-text">准备抓取</div>
+    </div>
+    
+    <!-- 开始界面 -->
+    <div id="start-screen">
+        <div class="start-content">
+            <div class="start-icon">🧧</div>
+            <h2>新春红包雨</h2>
+            <p>用手势抓红包，赢取大奖！</p>
+            <div class="start-features">
+                <div class="feature">
+                    <span class="feature-icon">✊</span>
+                    <span>握拳抓取红包</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">🖐️</span>
+                    <span>张开手继续抢</span>
+                </div>
+            </div>
+            <button id="start-btn" class="start-button">
+                <span>🎉 开始抢红包</span>
+            </button>
+        </div>
+    </div>
+    
+    <!-- 摄像头权限弹窗 -->
+    <div id="camera-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-icon">📷</div>
+            <h2>开启摄像头</h2>
+            <p class="modal-desc">
+                需要使用摄像头识别您的手势，<br>实现抓红包互动效果
+            </p>
+            <div class="modal-features">
+                <div class="modal-feature">
+                    <span>🔒</span>
+                    <span>数据仅本地处理</span>
+                </div>
+                <div class="modal-feature">
+                    <span>🚫</span>
+                    <span>不会上传服务器</span>
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button id="cancel-camera" class="modal-btn secondary">取消</button>
+                <button id="confirm-camera" class="modal-btn primary">允许开启</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 全屏按钮 -->
+    <button id="fullscreen-btn" class="floating-btn" title="全屏">
+        <span>⛶</span>
+    </button>
+    
+    <!-- 重新开始按钮 -->
+    <button id="restart-btn" class="floating-btn hidden" title="重新开始">
+        <span>🔄</span>
+    </button>
+    
+    <!-- 加载 Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- 加载 MediaPipe Hands -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+    <!-- 主程序 -->
+    <script src="main.js"></script>
+</body>
+</html>
